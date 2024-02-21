@@ -1,0 +1,18 @@
+def svm_loss_naive
+computing the dW
+for the i-th sample
+  for the j-th class's score
+    if margin>0
+      loss+=margin
+      //mul(W.T[j], X[i].T) is the score for the wrong class, we want to decrease it
+      //W.T[j] is the template for the j-th class, we want to adjust it
+      //So we calculate the loss function's derivative to W, which is X[i].T
+      //W[;,j] is the template, dW[:, j] is the derivative
+      //What change do we want to made for dW[:, j] in this iteration?
+      //let X[i].T=a, dW[:, j]=x_1, dW[:, Y[i]]=x_2
+      //loss=a*x_1-a*x_2-1
+      //In this iteration(For this sample), loss's derivative to x_1 is a, to x_2 is -a
+      //We want the sum of all the sample's derivative so we do +=, -= here
+      dW[:, j] += X[i].T
+      # 对于正确的类别y[i]，减去X[i]
+      dW[:, y[i]] -= X[i].T
